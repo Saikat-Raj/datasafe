@@ -27,23 +27,18 @@ import java.nio.file.Paths;
 import java.util.function.Supplier;
 
 @Slf4j
-@CommandLine.Command(
-        name = "datasafe-cli",
-        subcommands = {
-                Help.class,
-                Profile.class,
-                Privatespace.class,
-                Inbox.class
-        }
-)
+@CommandLine.Command(name = "datasafe-cli", subcommands = {
+        Help.class,
+        Profile.class,
+        Privatespace.class,
+        Inbox.class
+})
 @RequiredArgsConstructor
 public class Cli implements Runnable {
 
     @Getter
-    @CommandLine.Option(
-            names = {"--root-dir", "-rd"},
-            description = "Folder with user profiles, default is current directory"
-    )
+    @CommandLine.Option(names = { "--root-dir",
+            "-rd" }, description = "Folder with user profiles, default is current directory")
     private Path profilesRoot = Paths.get("");
 
     @CommandLine.ArgGroup(multiplicity = "1")
@@ -76,9 +71,8 @@ public class Cli implements Runnable {
 
     private static class CredentialsExclusive {
 
-        @CommandLine.Option(
-                names = {"--credentials", "-c"},
-                description = "File with credentials location. It contains JSON: " +
+        @CommandLine.Option(names = { "--credentials",
+                "-c" }, description = "File with credentials location. It contains JSON: " +
                         "{" +
                         "\"username\": \"<username>\", " +
                         "\"password\": \"<password>\", " +
@@ -119,7 +113,9 @@ public class Cli implements Runnable {
     }
 
     /**
-     * See {@link de.adorsys.datasafe.cli.hacks.graalfeature.GraalCompileFixCryptoRegistrar} for details.
+     * See
+     * {@link de.adorsys.datasafe.cli.hacks.graalfeature.GraalCompileFixCryptoRegistrar}
+     * for details.
      */
     @SneakyThrows
     private static void reInitializeRandomAgain() {
